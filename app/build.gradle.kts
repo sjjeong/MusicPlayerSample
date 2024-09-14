@@ -50,6 +50,7 @@ android {
 
 dependencies {
     implementation(project(":core:ui"))
+    implementation(project(":core:local"))
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
