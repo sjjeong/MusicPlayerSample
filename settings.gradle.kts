@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "MusicPlayerSample"
 include(":app")
+include(":core:ui")

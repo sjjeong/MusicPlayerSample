@@ -1,4 +1,4 @@
-package com.dino.musicplayersample.ui.theme
+package com.dino.core.ui.theme
 
 import android.app.Activity
 import android.os.Build
