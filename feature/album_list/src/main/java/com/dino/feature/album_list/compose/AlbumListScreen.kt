@@ -1,5 +1,6 @@
 package com.dino.feature.album_list.compose
 
+import android.net.Uri
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -20,13 +21,15 @@ import kotlinx.collections.immutable.toImmutableList
 
 @Composable
 fun AlbumListScreen(
+    onAlbumClick: (Uri) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: AlbumListViewModel = viewModel(),
 ) {
     val uiState by viewModel.uiStateStream.collectAsStateWithLifecycle()
     AlbumListScreen(
-        uiState = uiState,
         modifier = modifier,
+        uiState = uiState,
+        onAlbumClick = onAlbumClick,
     )
 }
 
@@ -34,6 +37,7 @@ fun AlbumListScreen(
 @Composable
 fun AlbumListScreen(
     uiState: AlbumListUiState,
+    onAlbumClick: (Uri) -> Unit,
     modifier: Modifier = Modifier,
 ) {
 
@@ -59,6 +63,7 @@ fun AlbumListScreen(
             is AlbumListUiState.Success -> {
                 AlbumListSuccessScreen(
                     items = uiState.items,
+                    onAlbumClick = onAlbumClick,
                     modifier = Modifier.padding(paddingValues)
                 )
             }
@@ -77,9 +82,11 @@ private fun AlbumListScreenPreviewSuccess() {
                     title = "Album $it",
                     artist = "Artist $it",
                     fileName = null,
+                    uri = Uri.EMPTY,
                 )
             }.toImmutableList()
         ),
+        onAlbumClick = {},
     )
 }
 
@@ -88,6 +95,7 @@ private fun AlbumListScreenPreviewSuccess() {
 private fun AlbumListScreenPreviewLoading() {
     AlbumListScreen(
         uiState = AlbumListUiState.Loading,
+        onAlbumClick = {},
     )
 }
 
@@ -97,6 +105,7 @@ private fun AlbumListScreenPreviewLoading() {
 private fun AlbumListScreenPreviewEmpty() {
     AlbumListScreen(
         uiState = AlbumListUiState.Empty,
+        onAlbumClick = {},
     )
 }
 
@@ -106,5 +115,6 @@ private fun AlbumListScreenPreviewEmpty() {
 private fun AlbumListScreenPreviewError() {
     AlbumListScreen(
         uiState = AlbumListUiState.Error,
+        onAlbumClick = {},
     )
 }

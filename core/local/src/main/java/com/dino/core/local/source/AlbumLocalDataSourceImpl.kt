@@ -16,4 +16,8 @@ class AlbumLocalDataSourceImpl @Inject constructor(
         return json.decodeFromString<List<AlbumLocal>>(jsonString)
             .map { it.toDto() }
     }
+
+    override suspend fun getAlbum(id: String): AlbumDto? {
+        return getAlbums().find { it.id == id }
+    }
 }

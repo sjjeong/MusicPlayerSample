@@ -1,5 +1,6 @@
 package com.dino.feature.album_list.compose
 
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -27,11 +28,17 @@ import com.dino.feature.album_list.model.AlbumModel
 @Composable
 fun AlbumListItem(
     album: AlbumModel,
+    onClick: (Uri) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
     val bitmap = Mp3AlbumArtExtractor.getAlbumArtFromRaw(context, album.fileName)?.asImageBitmap()
-    Card(modifier = modifier) {
+    Card(
+        modifier = modifier,
+        onClick = {
+            onClick(album.uri)
+        }
+    ) {
         if (bitmap != null) {
             Image(
                 modifier = Modifier
@@ -74,11 +81,13 @@ fun AlbumListItem(
 @Composable
 private fun AlbumListItemPreview() {
     AlbumListItem(
-        AlbumModel(
+        album = AlbumModel(
             id = "",
             title = "title",
             artist = "artist",
-            fileName = "adele_30_easy_on_me"
-        )
+            fileName = "adele_30_easy_on_me",
+            uri = Uri.EMPTY,
+        ),
+        onClick = {}
     )
 }

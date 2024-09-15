@@ -1,25 +1,19 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.kotlin.android.ksp)
     alias(libs.plugins.hilt.android)
 }
 
 android {
-    namespace = "com.dino.musicplayersample"
+    namespace = "com.dino.feature.album_detail"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.dino.musicplayersample"
         minSdk = 26
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -50,12 +44,9 @@ android {
 
 dependencies {
     implementation(project(":core:ui"))
+    implementation(project(":core:util"))
+    implementation(project(":core:model"))
     implementation(project(":core:domain"))
-    implementation(project(":core:data"))
-    implementation(project(":core:local"))
-
-    implementation(project(":feature:album_list"))
-    implementation(project(":feature:album_detail"))
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
@@ -63,8 +54,5 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
 }
+

@@ -1,5 +1,6 @@
 package com.dino.feature.album_list.compose
 
+import android.net.Uri
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -17,6 +18,7 @@ import kotlinx.collections.immutable.toImmutableList
 @Composable
 fun AlbumListSuccessScreen(
     items: ImmutableList<AlbumModel>,
+    onAlbumClick: (Uri) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Box(modifier = modifier) {
@@ -30,7 +32,10 @@ fun AlbumListSuccessScreen(
                 items = items,
                 key = { it.id }
             ) { item ->
-                AlbumListItem(album = item)
+                AlbumListItem(
+                    album = item,
+                    onClick = onAlbumClick
+                )
             }
         }
     }
@@ -47,7 +52,9 @@ private fun AlbumListSuccessScreenPreview() {
                 title = "Album $it",
                 artist = "Artist $it",
                 fileName = null,
+                uri = Uri.EMPTY,
             )
-        }.toImmutableList()
+        }.toImmutableList(),
+        onAlbumClick = {},
     )
 }

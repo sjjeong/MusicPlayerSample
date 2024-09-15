@@ -11,4 +11,8 @@ class AlbumRepositoryImpl @Inject constructor(
     override suspend fun getAlbums(): List<AlbumDto> {
         return albumLocalDataSource.getAlbums()
     }
+
+    override suspend fun getAlbum(id: String): AlbumDto? {
+        return albumLocalDataSource.getAlbum(id)
+    }
 }
