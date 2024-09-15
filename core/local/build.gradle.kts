@@ -33,6 +33,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":common:serialization"))
     implementation(project(":core:data"))
     implementation(project(":core:model"))
 

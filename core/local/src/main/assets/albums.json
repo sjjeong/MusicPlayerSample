@@ -6,7 +6,8 @@
     "songs": [
       {
         "id": "adele:30:easy_on_me",
-        "title": "Easy On Me"
+        "title": "Easy On Me",
+        "fileName": "adele_30_easy_on_me"
       }
     ]
   },
@@ -17,7 +18,8 @@
     "songs": [
       {
         "id": "sia:1000_forms_of_fear:chandelier",
-        "title": "Chandelier"
+        "title": "Chandelier",
+        "fileName": "sia_1000_forms_of_fear_chandelier"
       }
     ]
   },
@@ -28,7 +30,8 @@
     "songs": [
       {
         "id": "sia:1000_unstoppable:unstoppable",
-        "title": "Unstoppable"
+        "title": "Unstoppable",
+        "fileName": "sia_unstoppable_unstoppable"
       }
     ]
   },
@@ -39,7 +42,8 @@
     "songs": [
       {
         "id": "the_weeknd:after_hours:after_hours",
-        "title": "After Hours"
+        "title": "After Hours",
+        "fileName": "the_weeknd_after_hours_after_hours"
       }
     ]
   },
@@ -50,11 +54,13 @@
     "songs": [
       {
         "id": "the_weeknd:starboy:starboy",
-        "title": "Starboy (Feat. Daft Punk) (Explicit Ver.)"
+        "title": "Starboy (Feat. Daft Punk) (Explicit Ver.)",
+        "fileName": "the_weeknd_starboy_starboy"
       },
       {
         "id": "the_weeknd:starboy:oridinary_life",
-        "title": "Ordinary Life (Explicit Ver.)"
+        "title": "Ordinary Life (Explicit Ver.)",
+        "fileName": "the_weeknd_starboy_ordinary_life"
       }
     ]
   }

@@ -54,6 +54,8 @@ dependencies {
     implementation(project(":core:data"))
     implementation(project(":core:local"))
 
+    implementation(project(":feature:album_list"))
+
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
 

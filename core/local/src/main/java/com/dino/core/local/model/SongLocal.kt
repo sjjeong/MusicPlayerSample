@@ -7,11 +7,13 @@ import kotlinx.serialization.Serializable
 data class SongLocal(
     val id: String,
     val title: String,
+    val fileName: String?,
 )
 
 fun SongLocal.toDto(): SongDto {
     return SongDto(
         id = id,
         title = title,
+        fileName = fileName,
     )
 }
