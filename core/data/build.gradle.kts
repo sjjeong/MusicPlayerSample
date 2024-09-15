@@ -3,11 +3,10 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.kotlin.android.ksp)
     alias(libs.plugins.hilt.android)
-    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
-    namespace = "com.dino.core.local"
+    namespace = "com.dino.core.data"
     compileSdk = 34
 
     defaultConfig {
@@ -33,14 +32,11 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:data"))
+    implementation(project(":core:domain"))
     implementation(project(":core:model"))
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
-
-    implementation(libs.kotlin.serialization)
-    implementation(libs.kotlin.coroutine.core)
 
     testImplementation(libs.junit)
 }

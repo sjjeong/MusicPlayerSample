@@ -1,13 +1,10 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
-    alias(libs.plugins.kotlin.android.ksp)
-    alias(libs.plugins.hilt.android)
-    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
-    namespace = "com.dino.core.local"
+    namespace = "com.dino.core.model"
     compileSdk = 34
 
     defaultConfig {
@@ -33,14 +30,11 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:data"))
-    implementation(project(":core:model"))
 
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.compiler)
-
-    implementation(libs.kotlin.serialization)
-    implementation(libs.kotlin.coroutine.core)
-
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
     testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 }
