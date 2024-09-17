@@ -18,8 +18,11 @@ import kotlinx.collections.immutable.toImmutableList
 @Composable
 fun AlbumDetailFoundScreen(
     album: AlbumDetailModel,
+    isPlaying: Boolean,
     onPlayClick: () -> Unit,
     onShuffleClick: () -> Unit,
+    onPlaySongClick: (SongModel) -> Unit,
+    onPauseClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
@@ -32,11 +35,14 @@ fun AlbumDetailFoundScreen(
         )
         HorizontalDivider()
         AlbumDetailMusicController(
+            isPlaying = isPlaying,
             onPlayClick = onPlayClick,
             onShuffleClick = onShuffleClick,
+            onPauseClick = onPauseClick,
         )
         AlbumDetailSongList(
-            songs = album.songs
+            songs = album.songs,
+            onPlaySongClick = onPlaySongClick,
         )
     }
 
@@ -44,7 +50,7 @@ fun AlbumDetailFoundScreen(
 
 @Preview(showBackground = true)
 @Composable
-private fun AlbumDetailFoundScreenPreview() {
+private fun AlbumDetailFoundScreenNoPlayPreview() {
     AlbumDetailFoundScreen(
         album = AlbumDetailModel(
             title = "Album 1",
@@ -58,7 +64,35 @@ private fun AlbumDetailFoundScreenPreview() {
                 )
             }.toImmutableList()
         ),
+        isPlaying = false,
         onPlayClick = {},
         onShuffleClick = {},
+        onPlaySongClick = {},
+        onPauseClick = {},
+    )
+}
+
+
+@Preview(showBackground = true)
+@Composable
+private fun AlbumDetailFoundScreenPlayingPreview() {
+    AlbumDetailFoundScreen(
+        album = AlbumDetailModel(
+            title = "Album 1",
+            artist = "Artist 1",
+            fileName = null,
+            songs = List(10) {
+                SongModel(
+                    id = "song:$it",
+                    title = "Song $it",
+                    fileName = null,
+                )
+            }.toImmutableList()
+        ),
+        isPlaying = true,
+        onPlayClick = {},
+        onShuffleClick = {},
+        onPlaySongClick = {},
+        onPauseClick = {},
     )
 }

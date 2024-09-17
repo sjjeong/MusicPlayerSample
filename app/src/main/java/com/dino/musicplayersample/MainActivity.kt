@@ -10,5 +10,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         val intent = Intent(this, AlbumListActivity::class.java)
         startActivity(intent)
+        finish()
     }
 }

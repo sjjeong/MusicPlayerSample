@@ -8,13 +8,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class AlbumDetailActivity : BaseActivity() {
     override val content: @Composable () -> Unit = {
-        AlbumDetailScreen(
-            onPlayClick = {
-                // TODO: Play
-            },
-            onShuffleClick = {
-                // TODO: Shuffle Play
-            },
-        )
+        AlbumDetailScreen()
     }
 }

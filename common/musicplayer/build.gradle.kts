@@ -1,12 +1,10 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
-    alias(libs.plugins.kotlin.android.ksp)
-    alias(libs.plugins.hilt.android)
 }
 
 android {
-    namespace = "com.dino.core.domain"
+    namespace = "com.dino.common.musicplayer"
     compileSdk = 34
 
     defaultConfig {
@@ -32,11 +30,12 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:model"))
-    implementation(project(":common:musicplayer"))
+    implementation(libs.media3.exoplayer)
+    implementation(libs.media3.session)
 
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.compiler)
+    implementation(libs.kotlin.coroutine.core)
 
     testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 }

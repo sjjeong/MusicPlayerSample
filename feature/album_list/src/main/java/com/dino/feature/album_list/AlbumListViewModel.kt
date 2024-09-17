@@ -1,7 +1,7 @@
 package com.dino.feature.album_list
 
 import androidx.lifecycle.viewModelScope
-import com.dino.core.domain.usecase.GetAlbumsUseCase
+import com.dino.core.domain.usecase.album.GetAlbumsUseCase
 import com.dino.core.ui.base.BaseViewModel
 import com.dino.feature.album_list.model.toUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel

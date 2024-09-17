@@ -49,10 +49,13 @@ android {
 }
 
 dependencies {
+    implementation(project(":common:musicplayer"))
+
     implementation(project(":core:ui"))
     implementation(project(":core:domain"))
     implementation(project(":core:data"))
     implementation(project(":core:local"))
+    implementation(project(":core:util"))
 
     implementation(project(":feature:album_list"))
     implementation(project(":feature:album_detail"))

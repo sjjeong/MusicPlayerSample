@@ -1,5 +1,6 @@
 package com.dino.feature.album_detail.compose.found
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
@@ -15,14 +16,18 @@ import com.dino.feature.album_detail.model.SongModel
 
 @Composable
 fun AlbumDetailSongListItem(
+    onClick: (SongModel) -> Unit,
     index: Int,
     song: SongModel,
     modifier: Modifier = Modifier,
 ) {
     Row(
-        modifier = modifier.padding(16.dp),
+        modifier = modifier
+            .clickable { onClick(song) }
+            .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
+        Spacer(modifier = Modifier.width(12.dp))
         Text(text = index.toString())
         Spacer(modifier = Modifier.width(8.dp))
         Text(
@@ -36,6 +41,7 @@ fun AlbumDetailSongListItem(
 @Composable
 private fun AlbumDetailSongListItemPreview() {
     AlbumDetailSongListItem(
+        onClick = {},
         index = 0,
         song = SongModel(
             id = "song:0",

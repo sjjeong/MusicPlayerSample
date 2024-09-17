@@ -6,5 +6,8 @@ sealed interface AlbumDetailUiState {
     data object Loading : AlbumDetailUiState
     data object Error : AlbumDetailUiState
     data object NotFound : AlbumDetailUiState
-    data class Found(val album: AlbumDetailModel) : AlbumDetailUiState
+    data class Found(
+        val album: AlbumDetailModel,
+        val isPlaying: Boolean,
+    ) : AlbumDetailUiState
 }

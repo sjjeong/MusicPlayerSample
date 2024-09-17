@@ -1,4 +1,4 @@
-package com.dino.core.domain.usecase
+package com.dino.core.domain.usecase.album
 
 import com.dino.core.domain.repository.AlbumRepository
 import com.dino.core.model.AlbumDto

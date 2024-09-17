@@ -21,8 +21,6 @@ import kotlinx.collections.immutable.toImmutableList
 
 @Composable
 fun AlbumDetailScreen(
-    onPlayClick: () -> Unit,
-    onShuffleClick: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: AlbumDetailViewModel = viewModel(),
 ) {
@@ -30,8 +28,10 @@ fun AlbumDetailScreen(
     AlbumDetailScreen(
         modifier = modifier,
         uiState = uiState,
-        onPlayClick = onPlayClick,
-        onShuffleClick = onShuffleClick,
+        onPlayClick = viewModel::play,
+        onShuffleClick = viewModel::shuffle,
+        onPlaySongClick = viewModel::playSong,
+        onPauseClick = viewModel::pause,
     )
 }
 
@@ -41,7 +41,9 @@ fun AlbumDetailScreen(
     uiState: AlbumDetailUiState,
     onPlayClick: () -> Unit,
     onShuffleClick: () -> Unit,
+    onPlaySongClick: (SongModel) -> Unit,
     modifier: Modifier = Modifier,
+    onPauseClick: () -> Unit,
 ) {
     Scaffold(
         modifier = modifier,
@@ -69,8 +71,11 @@ fun AlbumDetailScreen(
                 AlbumDetailFoundScreen(
                     modifier = Modifier.padding(paddingValues),
                     album = uiState.album,
+                    isPlaying = uiState.isPlaying,
                     onPlayClick = onPlayClick,
                     onShuffleClick = onShuffleClick,
+                    onPlaySongClick = onPlaySongClick,
+                    onPauseClick = onPauseClick,
                 )
             }
         }
@@ -85,6 +90,8 @@ private fun AlbumDetailScreenPreviewError() {
         uiState = AlbumDetailUiState.Error,
         onPlayClick = {},
         onShuffleClick = {},
+        onPlaySongClick = {},
+        onPauseClick = {},
     )
 }
 
@@ -95,6 +102,8 @@ private fun AlbumDetailScreenPreviewLoading() {
         uiState = AlbumDetailUiState.Loading,
         onPlayClick = {},
         onShuffleClick = {},
+        onPlaySongClick = {},
+        onPauseClick = {},
     )
 }
 
@@ -105,6 +114,8 @@ private fun AlbumDetailScreenPreviewNotFound() {
         uiState = AlbumDetailUiState.NotFound,
         onPlayClick = {},
         onShuffleClick = {},
+        onPlaySongClick = {},
+        onPauseClick = {},
     )
 }
 
@@ -124,9 +135,12 @@ private fun AlbumDetailScreenPreviewFound() {
                         fileName = null,
                     )
                 }.toImmutableList()
-            )
+            ),
+            isPlaying = false
         ),
         onPlayClick = {},
         onShuffleClick = {},
+        onPlaySongClick = {},
+        onPauseClick = {},
     )
 }

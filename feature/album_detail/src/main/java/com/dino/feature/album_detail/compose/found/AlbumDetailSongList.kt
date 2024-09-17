@@ -22,6 +22,7 @@ import kotlinx.collections.immutable.toImmutableList
 @Composable
 fun AlbumDetailSongList(
     songs: ImmutableList<SongModel>,
+    onPlaySongClick: (SongModel) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Box(
@@ -42,8 +43,8 @@ fun AlbumDetailSongList(
                 ) { index, item ->
                     AlbumDetailSongListItem(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(start = 12.dp),
+                            .fillMaxWidth(),
+                        onClick = onPlaySongClick,
                         index = index + 1,
                         song = item,
                     )
@@ -68,6 +69,7 @@ private fun AlbumDetailSongListPreview() {
                 title = "Song $it",
                 fileName = null,
             )
-        }.toImmutableList()
+        }.toImmutableList(),
+        onPlaySongClick = {},
     )
 }

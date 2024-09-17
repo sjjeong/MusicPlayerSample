@@ -47,6 +47,7 @@ dependencies {
     implementation(project(":core:util"))
     implementation(project(":core:model"))
     implementation(project(":core:domain"))
+    implementation(project(":common:musicplayer"))
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
