@@ -8,9 +8,12 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.dino.common.musicplayer.model.Song
+import com.dino.common.musicplayer_ui.MusicPlayer
 import com.dino.feature.album_list.model.AlbumModel
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
@@ -18,7 +21,13 @@ import kotlinx.collections.immutable.toImmutableList
 @Composable
 fun AlbumListSuccessScreen(
     items: ImmutableList<AlbumModel>,
+    currentSong: Song?,
+    isPlaying: Boolean,
+    isShowingPlayer: Boolean,
+    progress: Float,
     onAlbumClick: (Uri) -> Unit,
+    onPauseClick: () -> Unit,
+    onResumeClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Box(modifier = modifier) {
@@ -38,6 +47,17 @@ fun AlbumListSuccessScreen(
                 )
             }
         }
+        if (isShowingPlayer && currentSong != null) {
+            MusicPlayer(
+                modifier = Modifier.align(Alignment.BottomCenter),
+                song = currentSong,
+                progress = progress,
+                isPlaying = isPlaying,
+                onPause = onPauseClick,
+                onResume = onResumeClick,
+            )
+        }
+
     }
 
 }
@@ -55,6 +75,12 @@ private fun AlbumListSuccessScreenPreview() {
                 uri = Uri.EMPTY,
             )
         }.toImmutableList(),
+        currentSong = null,
+        isPlaying = false,
+        isShowingPlayer = false,
+        progress = 0.9f,
         onAlbumClick = {},
+        onPauseClick = {},
+        onResumeClick = {},
     )
 }

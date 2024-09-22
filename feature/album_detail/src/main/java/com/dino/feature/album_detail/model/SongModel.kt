@@ -19,7 +19,7 @@ fun SongModel.toSong(
     albumTitle: String,
     artist: String,
 ): Song {
-    return Song.Raw(
+    return Song(
         mediaId = id,
         title = title,
         artist = artist,

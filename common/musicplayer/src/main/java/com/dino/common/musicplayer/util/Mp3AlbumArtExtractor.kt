@@ -1,4 +1,4 @@
-package com.dino.core.util
+package com.dino.common.musicplayer.util
 
 import android.content.Context
 import android.content.res.AssetFileDescriptor

@@ -22,7 +22,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.dino.core.util.Mp3AlbumArtExtractor
+import com.dino.common.musicplayer.util.Mp3AlbumArtExtractor
 import com.dino.feature.album_list.model.AlbumModel
 
 @Composable

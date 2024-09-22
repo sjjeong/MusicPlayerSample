@@ -11,7 +11,6 @@ import com.dino.common.musicplayer.PlaybackService
 import com.dino.common.musicplayer.model.MediaEvent
 import com.dino.common.musicplayer.model.Song
 import com.dino.common.musicplayer.model.toPlayerState
-import com.dino.common.musicplayer.model.toSong
 import com.google.common.util.concurrent.ListenableFuture
 import com.google.common.util.concurrent.MoreExecutors
 import kotlinx.coroutines.FlowPreview
@@ -54,7 +53,7 @@ class DefaultMusicController(private val context: Context) : MusicController {
         get() = mediaController?.currentPosition ?: 0L
 
     override val currentSong: Song?
-        get() = mediaController?.currentMediaItem?.toSong()
+        get() = mediaController?.currentMediaItemIndex?.let { songs[it] }
 
     init {
         val sessionToken = SessionToken(context, ComponentName(context, PlaybackService::class.java))
@@ -70,10 +69,11 @@ class DefaultMusicController(private val context: Context) : MusicController {
             override fun onEvents(player: Player, events: Player.Events) {
                 super.onEvents(player, events)
 
+                player.currentMediaItemIndex
                 with(player) {
                     _mediaControllerStateFlow.value = MediaEvent(
                         playerState = playbackState.toPlayerState(isPlaying),
-                        currentMusic = currentMediaItem?.toSong(),
+                        currentSong = currentSong,
                         currentPosition = currentPosition.coerceAtLeast(0L),
                         totalDuration = duration.coerceAtLeast(0L),
                         isShuffleEnabled = shuffleModeEnabled,

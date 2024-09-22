@@ -2,7 +2,7 @@ package com.dino.common.musicplayer.model
 
 data class MediaEvent(
     val playerState: PlayerState,
-    val currentMusic: Song?,
+    val currentSong: Song?,
     val currentPosition: Long,
     val totalDuration: Long,
     val isShuffleEnabled: Boolean,
@@ -12,7 +12,7 @@ data class MediaEvent(
     companion object {
         val EMPTY = MediaEvent(
             playerState = PlayerState.STOPPED,
-            currentMusic = null,
+            currentSong = null,
             currentPosition = 0L,
             totalDuration = 0L,
             isShuffleEnabled = false,

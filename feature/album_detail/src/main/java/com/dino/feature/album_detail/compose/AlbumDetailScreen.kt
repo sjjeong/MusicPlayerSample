@@ -32,6 +32,7 @@ fun AlbumDetailScreen(
         onShuffleClick = viewModel::shuffle,
         onPlaySongClick = viewModel::playSong,
         onPauseClick = viewModel::pause,
+        onResumeClick = viewModel::resume,
     )
 }
 
@@ -42,8 +43,9 @@ fun AlbumDetailScreen(
     onPlayClick: () -> Unit,
     onShuffleClick: () -> Unit,
     onPlaySongClick: (SongModel) -> Unit,
-    modifier: Modifier = Modifier,
     onPauseClick: () -> Unit,
+    onResumeClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Scaffold(
         modifier = modifier,
@@ -71,11 +73,15 @@ fun AlbumDetailScreen(
                 AlbumDetailFoundScreen(
                     modifier = Modifier.padding(paddingValues),
                     album = uiState.album,
+                    currentSong = uiState.currentSong,
                     isPlaying = uiState.isPlaying,
+                    isShowingPlayer = uiState.isShowingPlayer,
+                    progress = uiState.progress,
                     onPlayClick = onPlayClick,
                     onShuffleClick = onShuffleClick,
                     onPlaySongClick = onPlaySongClick,
                     onPauseClick = onPauseClick,
+                    onResumeClick = onResumeClick,
                 )
             }
         }
@@ -92,6 +98,7 @@ private fun AlbumDetailScreenPreviewError() {
         onShuffleClick = {},
         onPlaySongClick = {},
         onPauseClick = {},
+        onResumeClick = {},
     )
 }
 
@@ -104,6 +111,7 @@ private fun AlbumDetailScreenPreviewLoading() {
         onShuffleClick = {},
         onPlaySongClick = {},
         onPauseClick = {},
+        onResumeClick = {},
     )
 }
 
@@ -116,6 +124,7 @@ private fun AlbumDetailScreenPreviewNotFound() {
         onShuffleClick = {},
         onPlaySongClick = {},
         onPauseClick = {},
+        onResumeClick = {},
     )
 }
 
@@ -136,11 +145,15 @@ private fun AlbumDetailScreenPreviewFound() {
                     )
                 }.toImmutableList()
             ),
-            isPlaying = false
+            currentSong = null,
+            isPlaying = false,
+            isShowingPlayer = false,
+            progress = 0.9f,
         ),
         onPlayClick = {},
         onShuffleClick = {},
         onPlaySongClick = {},
         onPauseClick = {},
+        onResumeClick = {},
     )
 }

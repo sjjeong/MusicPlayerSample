@@ -30,6 +30,8 @@ fun AlbumListScreen(
         modifier = modifier,
         uiState = uiState,
         onAlbumClick = onAlbumClick,
+        onPauseClick = viewModel::pause,
+        onResumeClick = viewModel::resume,
     )
 }
 
@@ -38,6 +40,8 @@ fun AlbumListScreen(
 fun AlbumListScreen(
     uiState: AlbumListUiState,
     onAlbumClick: (Uri) -> Unit,
+    onPauseClick: () -> Unit,
+    onResumeClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
 
@@ -63,7 +67,13 @@ fun AlbumListScreen(
             is AlbumListUiState.Success -> {
                 AlbumListSuccessScreen(
                     items = uiState.items,
+                    currentSong = uiState.currentSong,
+                    isPlaying = uiState.isPlaying,
+                    isShowingPlayer = uiState.isShowingPlayer,
+                    progress = uiState.progress,
                     onAlbumClick = onAlbumClick,
+                    onPauseClick = onPauseClick,
+                    onResumeClick = onResumeClick,
                     modifier = Modifier.padding(paddingValues)
                 )
             }
@@ -84,9 +94,15 @@ private fun AlbumListScreenPreviewSuccess() {
                     fileName = null,
                     uri = Uri.EMPTY,
                 )
-            }.toImmutableList()
+            }.toImmutableList(),
+            currentSong = null,
+            isPlaying = false,
+            isShowingPlayer = false,
+            progress = 0.9f,
         ),
         onAlbumClick = {},
+        onPauseClick = {},
+        onResumeClick = {},
     )
 }
 
@@ -96,6 +112,8 @@ private fun AlbumListScreenPreviewLoading() {
     AlbumListScreen(
         uiState = AlbumListUiState.Loading,
         onAlbumClick = {},
+        onPauseClick = {},
+        onResumeClick = {},
     )
 }
 
@@ -106,6 +124,8 @@ private fun AlbumListScreenPreviewEmpty() {
     AlbumListScreen(
         uiState = AlbumListUiState.Empty,
         onAlbumClick = {},
+        onPauseClick = {},
+        onResumeClick = {},
     )
 }
 
@@ -116,5 +136,7 @@ private fun AlbumListScreenPreviewError() {
     AlbumListScreen(
         uiState = AlbumListUiState.Error,
         onAlbumClick = {},
+        onPauseClick = {},
+        onResumeClick = {},
     )
 }
