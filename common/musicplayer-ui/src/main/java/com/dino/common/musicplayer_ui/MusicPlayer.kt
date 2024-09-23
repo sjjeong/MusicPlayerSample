@@ -16,63 +16,84 @@ import com.dino.common.musicplayer.util.Mp3AlbumArtExtractor
 fun MusicPlayer(
     song: Song,
     progress: Float,
+    volume: Float,
     isPlaying: Boolean,
     onPause: () -> Unit,
     onResume: () -> Unit,
+    onSkipToPreviousSong: () -> Unit,
+    onSkipToNextSong: () -> Unit,
+    onVolumeChange: (Float) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
-    var isExpanded by remember { mutableStateOf(false) }
+    var isShowModal by remember { mutableStateOf(false) }
     val albumArt by remember(song.fileName) {
         mutableStateOf(Mp3AlbumArtExtractor.getAlbumArtFromRaw(context, song.fileName)?.asImageBitmap())
     }
 
     MusicPlayer(
-        isExpanded = isExpanded,
+        isShowModal = isShowModal,
         title = song.title,
         artist = song.artist,
         albumArt = albumArt,
         progress = progress,
+        volume = volume,
         isPlaying = isPlaying,
         onPause = onPause,
         onResume = onResume,
-        onBannerClick = { isExpanded = true },
-        onFullClick = { isExpanded = false },
+        onSkipToPreviousSong = onSkipToPreviousSong,
+        onSkipToNextSong = onSkipToNextSong,
+        onVolumeChange = onVolumeChange,
+        onBannerClick = { isShowModal = true },
+        onMusicPlayerModalHide = { isShowModal = false },
         modifier = modifier,
     )
 }
 
 @Composable
 private fun MusicPlayer(
-    isExpanded: Boolean,
+    isShowModal: Boolean,
     title: String,
     artist: String,
     albumArt: ImageBitmap?,
     progress: Float,
     isPlaying: Boolean,
+    volume: Float,
     onPause: () -> Unit,
     onResume: () -> Unit,
+    onSkipToPreviousSong: () -> Unit,
+    onSkipToNextSong: () -> Unit,
+    onVolumeChange: (Float) -> Unit,
     onBannerClick: () -> Unit,
-    onFullClick: () -> Unit,
+    onMusicPlayerModalHide: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
 
-    if (isExpanded) {
-        MusicPlayerFull(
-            modifier = modifier,
-            onClick = onFullClick,
-        )
-    } else {
-        MusicPlayerBanner(
-            modifier = modifier,
+    if (isShowModal) {
+        MusicPlayerModal(
             title = title,
             artist = artist,
             albumArt = albumArt,
             progress = progress,
+            volume = volume,
             isPlaying = isPlaying,
-            onClick = onBannerClick,
             onPause = onPause,
             onResume = onResume,
+            onSkipToPreviousSong = onSkipToPreviousSong,
+            onSkipToNextSong = onSkipToNextSong,
+            onVolumeChange = onVolumeChange,
+            onHide = onMusicPlayerModalHide,
         )
     }
+    MusicPlayerBanner(
+        modifier = modifier,
+        title = title,
+        artist = artist,
+        albumArt = albumArt,
+        progress = progress,
+        isPlaying = isPlaying,
+        onClick = onBannerClick,
+        onPause = onPause,
+        onResume = onResume,
+    )
 }

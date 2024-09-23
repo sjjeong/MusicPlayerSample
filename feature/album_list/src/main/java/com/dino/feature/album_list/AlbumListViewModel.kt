@@ -7,6 +7,9 @@ import com.dino.core.domain.usecase.player.GetCurrentPositionUseCase
 import com.dino.core.domain.usecase.player.GetMediaEventStreamUseCase
 import com.dino.core.domain.usecase.player.PauseSongUseCase
 import com.dino.core.domain.usecase.player.ResumeSongUseCase
+import com.dino.core.domain.usecase.player.SetVolumeUseCase
+import com.dino.core.domain.usecase.player.SkipToNextSongUseCase
+import com.dino.core.domain.usecase.player.SkipToPreviousSongUseCase
 import com.dino.core.ui.base.BaseViewModel
 import com.dino.feature.album_list.model.toUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -31,6 +34,9 @@ class AlbumListViewModel @Inject constructor(
     private val getAlbumsUseCase: GetAlbumsUseCase,
     private val pauseSongUseCase: PauseSongUseCase,
     private val resumeSongUseCase: ResumeSongUseCase,
+    private val skipToPreviousSongUseCase: SkipToPreviousSongUseCase,
+    private val skipToNextSongUseCase: SkipToNextSongUseCase,
+    private val setVolumeUseCase: SetVolumeUseCase,
     getMediaEventStreamUseCase: GetMediaEventStreamUseCase,
     getCurrentPositionUseCase: GetCurrentPositionUseCase,
 ) : BaseViewModel() {
@@ -69,6 +75,7 @@ class AlbumListViewModel @Inject constructor(
                 isPlaying = mediaEvent.playerState == PlayerState.PLAYING,
                 isShowingPlayer = mediaEvent.playerState != PlayerState.STOPPED,
                 progress = currentPosition.toFloat() / mediaEvent.totalDuration,
+                volume = mediaEvent.volume,
             )
         }
     }
@@ -87,5 +94,17 @@ class AlbumListViewModel @Inject constructor(
 
     fun resume() {
         resumeSongUseCase()
+    }
+
+    fun skipToPreviousSong() {
+        skipToPreviousSongUseCase()
+    }
+
+    fun skipToNextSong() {
+        skipToNextSongUseCase()
+    }
+
+    fun setVolume(volume: Float) {
+        setVolumeUseCase(volume)
     }
 }

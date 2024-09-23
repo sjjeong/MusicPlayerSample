@@ -13,5 +13,6 @@ sealed interface AlbumDetailUiState {
         val isPlaying: Boolean,
         val isShowingPlayer: Boolean,
         val progress: Float,
+        val volume: Float,
     ) : AlbumDetailUiState
 }

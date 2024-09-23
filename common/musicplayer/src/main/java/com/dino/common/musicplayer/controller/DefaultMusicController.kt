@@ -13,10 +13,8 @@ import com.dino.common.musicplayer.model.Song
 import com.dino.common.musicplayer.model.toPlayerState
 import com.google.common.util.concurrent.ListenableFuture
 import com.google.common.util.concurrent.MoreExecutors
-import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.debounce
 
 class DefaultMusicController(private val context: Context) : MusicController {
 
@@ -46,8 +44,7 @@ class DefaultMusicController(private val context: Context) : MusicController {
 
     private val _mediaControllerStateFlow: MutableStateFlow<MediaEvent> = MutableStateFlow(MediaEvent.EMPTY)
 
-    @OptIn(FlowPreview::class)
-    override val mediaEventStream: Flow<MediaEvent> = _mediaControllerStateFlow.debounce(200L)
+    override val mediaEventStream: Flow<MediaEvent> = _mediaControllerStateFlow
 
     override val currentPosition: Long
         get() = mediaController?.currentPosition ?: 0L
@@ -65,6 +62,7 @@ class DefaultMusicController(private val context: Context) : MusicController {
     }
 
     private fun controllerListener() {
+        mediaController?.volume = 0.5f
         mediaController?.addListener(object : Player.Listener {
             override fun onEvents(player: Player, events: Player.Events) {
                 super.onEvents(player, events)
@@ -77,7 +75,8 @@ class DefaultMusicController(private val context: Context) : MusicController {
                         currentPosition = currentPosition.coerceAtLeast(0L),
                         totalDuration = duration.coerceAtLeast(0L),
                         isShuffleEnabled = shuffleModeEnabled,
-                        isRepeatOneEnabled = repeatMode == Player.REPEAT_MODE_ONE
+                        isRepeatOneEnabled = repeatMode == Player.REPEAT_MODE_ONE,
+                        volume = mediaController?.volume ?: 0.5f
                     )
                 }
             }
@@ -115,5 +114,9 @@ class DefaultMusicController(private val context: Context) : MusicController {
 
     override fun skipToPreviousSong() {
         mediaController?.seekToPrevious()
+    }
+
+    override fun setVolume(volume: Float) {
+        mediaController?.volume = volume
     }
 }

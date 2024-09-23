@@ -25,9 +25,13 @@ fun AlbumListSuccessScreen(
     isPlaying: Boolean,
     isShowingPlayer: Boolean,
     progress: Float,
+    volume: Float,
     onAlbumClick: (Uri) -> Unit,
     onPauseClick: () -> Unit,
     onResumeClick: () -> Unit,
+    onSkipToPreviousSongClick: () -> Unit,
+    onSkipToNextSongClick: () -> Unit,
+    onVolumeChange: (Float) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Box(modifier = modifier) {
@@ -52,9 +56,13 @@ fun AlbumListSuccessScreen(
                 modifier = Modifier.align(Alignment.BottomCenter),
                 song = currentSong,
                 progress = progress,
+                volume = volume,
                 isPlaying = isPlaying,
                 onPause = onPauseClick,
                 onResume = onResumeClick,
+                onSkipToPreviousSong = onSkipToPreviousSongClick,
+                onSkipToNextSong = onSkipToNextSongClick,
+                onVolumeChange = onVolumeChange,
             )
         }
 
@@ -79,8 +87,12 @@ private fun AlbumListSuccessScreenPreview() {
         isPlaying = false,
         isShowingPlayer = false,
         progress = 0.9f,
+        volume = 0.5f,
         onAlbumClick = {},
         onPauseClick = {},
         onResumeClick = {},
+        onSkipToPreviousSongClick = {},
+        onSkipToNextSongClick = {},
+        onVolumeChange = {},
     )
 }

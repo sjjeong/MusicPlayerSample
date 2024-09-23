@@ -14,5 +14,6 @@ sealed interface AlbumListUiState {
         val isPlaying: Boolean,
         val isShowingPlayer: Boolean,
         val progress: Float,
+        val volume: Float,
     ) : AlbumListUiState
 }

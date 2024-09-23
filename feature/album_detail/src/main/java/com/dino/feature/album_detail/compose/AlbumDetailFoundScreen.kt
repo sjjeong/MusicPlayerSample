@@ -26,11 +26,15 @@ fun AlbumDetailFoundScreen(
     isPlaying: Boolean,
     isShowingPlayer: Boolean,
     progress: Float,
+    volume: Float,
     onPlayClick: () -> Unit,
     onShuffleClick: () -> Unit,
     onPlaySongClick: (SongModel) -> Unit,
     onPauseClick: () -> Unit,
     onResumeClick: () -> Unit,
+    onSkipToPreviousSongClick: () -> Unit,
+    onSkipToNextSongClick: () -> Unit,
+    onVolumeChange: (Float) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
@@ -57,9 +61,13 @@ fun AlbumDetailFoundScreen(
                 modifier = Modifier.align(Alignment.BottomCenter),
                 song = currentSong,
                 progress = progress,
+                volume = volume,
                 isPlaying = isPlaying,
                 onPause = onPauseClick,
                 onResume = onResumeClick,
+                onSkipToPreviousSong = onSkipToPreviousSongClick,
+                onSkipToNextSong = onSkipToNextSongClick,
+                onVolumeChange = onVolumeChange
             )
         }
     }
@@ -85,11 +93,15 @@ private fun AlbumDetailFoundScreenNoPlayPreview() {
         isPlaying = false,
         isShowingPlayer = false,
         progress = 0.9f,
+        volume = 0.5f,
         onPlayClick = {},
         onShuffleClick = {},
         onPlaySongClick = {},
         onPauseClick = {},
         onResumeClick = {},
+        onSkipToPreviousSongClick = {},
+        onSkipToNextSongClick = {},
+        onVolumeChange = {},
     )
 }
 
@@ -114,10 +126,14 @@ private fun AlbumDetailFoundScreenPlayingPreview() {
         isPlaying = true,
         isShowingPlayer = true,
         progress = 0.9f,
+        volume = 0.5f,
         onPlayClick = {},
         onShuffleClick = {},
         onPlaySongClick = {},
         onPauseClick = {},
         onResumeClick = {},
+        onSkipToPreviousSongClick = {},
+        onSkipToNextSongClick = {},
+        onVolumeChange = {},
     )
 }

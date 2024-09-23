@@ -26,4 +26,6 @@ interface MusicController {
     fun skipToPreviousSong()
 
     fun seekTo(position: Long)
+
+    fun setVolume(volume: Float)
 }

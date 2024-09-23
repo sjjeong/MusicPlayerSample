@@ -7,6 +7,7 @@ data class MediaEvent(
     val totalDuration: Long,
     val isShuffleEnabled: Boolean,
     val isRepeatOneEnabled: Boolean,
+    val volume: Float,
 ) {
 
     companion object {
@@ -17,6 +18,7 @@ data class MediaEvent(
             totalDuration = 0L,
             isShuffleEnabled = false,
             isRepeatOneEnabled = false,
+            volume = 0.5f
         )
     }
 }

@@ -33,6 +33,9 @@ fun AlbumDetailScreen(
         onPlaySongClick = viewModel::playSong,
         onPauseClick = viewModel::pause,
         onResumeClick = viewModel::resume,
+        onSkipToPreviousSongClick = viewModel::skipToPreviousSong,
+        onSkipToNextSongClick = viewModel::skipToNextSong,
+        onVolumeChange = viewModel::setVolume,
     )
 }
 
@@ -45,6 +48,9 @@ fun AlbumDetailScreen(
     onPlaySongClick: (SongModel) -> Unit,
     onPauseClick: () -> Unit,
     onResumeClick: () -> Unit,
+    onSkipToPreviousSongClick: () -> Unit,
+    onSkipToNextSongClick: () -> Unit,
+    onVolumeChange: (Float) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
@@ -77,11 +83,15 @@ fun AlbumDetailScreen(
                     isPlaying = uiState.isPlaying,
                     isShowingPlayer = uiState.isShowingPlayer,
                     progress = uiState.progress,
+                    volume = uiState.volume,
                     onPlayClick = onPlayClick,
                     onShuffleClick = onShuffleClick,
                     onPlaySongClick = onPlaySongClick,
                     onPauseClick = onPauseClick,
                     onResumeClick = onResumeClick,
+                    onSkipToPreviousSongClick = onSkipToPreviousSongClick,
+                    onSkipToNextSongClick = onSkipToNextSongClick,
+                    onVolumeChange = onVolumeChange,
                 )
             }
         }
@@ -99,6 +109,9 @@ private fun AlbumDetailScreenPreviewError() {
         onPlaySongClick = {},
         onPauseClick = {},
         onResumeClick = {},
+        onSkipToPreviousSongClick = {},
+        onSkipToNextSongClick = {},
+        onVolumeChange = {},
     )
 }
 
@@ -112,6 +125,9 @@ private fun AlbumDetailScreenPreviewLoading() {
         onPlaySongClick = {},
         onPauseClick = {},
         onResumeClick = {},
+        onSkipToPreviousSongClick = {},
+        onSkipToNextSongClick = {},
+        onVolumeChange = {},
     )
 }
 
@@ -125,6 +141,9 @@ private fun AlbumDetailScreenPreviewNotFound() {
         onPlaySongClick = {},
         onPauseClick = {},
         onResumeClick = {},
+        onSkipToPreviousSongClick = {},
+        onSkipToNextSongClick = {},
+        onVolumeChange = {},
     )
 }
 
@@ -149,11 +168,15 @@ private fun AlbumDetailScreenPreviewFound() {
             isPlaying = false,
             isShowingPlayer = false,
             progress = 0.9f,
+            volume = 0.5f,
         ),
         onPlayClick = {},
         onShuffleClick = {},
         onPlaySongClick = {},
         onPauseClick = {},
         onResumeClick = {},
+        onSkipToPreviousSongClick = {},
+        onSkipToNextSongClick = {},
+        onVolumeChange = {},
     )
 }

@@ -10,6 +10,9 @@ import com.dino.core.domain.usecase.player.GetMediaEventStreamUseCase
 import com.dino.core.domain.usecase.player.PauseSongUseCase
 import com.dino.core.domain.usecase.player.PlaySongUseCase
 import com.dino.core.domain.usecase.player.ResumeSongUseCase
+import com.dino.core.domain.usecase.player.SetVolumeUseCase
+import com.dino.core.domain.usecase.player.SkipToNextSongUseCase
+import com.dino.core.domain.usecase.player.SkipToPreviousSongUseCase
 import com.dino.core.ui.base.BaseViewModel
 import com.dino.feature.album_detail.model.AlbumDetailModel
 import com.dino.feature.album_detail.model.SongModel
@@ -38,6 +41,9 @@ class AlbumDetailViewModel @Inject constructor(
     private val playSongUseCase: PlaySongUseCase,
     private val pauseSongUseCase: PauseSongUseCase,
     private val resumeSongUseCase: ResumeSongUseCase,
+    private val skipToPreviousSongUseCase: SkipToPreviousSongUseCase,
+    private val skipToNextSongUseCase: SkipToNextSongUseCase,
+    private val setVolumeUseCase: SetVolumeUseCase,
     getMediaEventStreamUseCase: GetMediaEventStreamUseCase,
     getCurrentPositionUseCase: GetCurrentPositionUseCase,
 ) : BaseViewModel() {
@@ -89,6 +95,7 @@ class AlbumDetailViewModel @Inject constructor(
                 isPlaying = mediaEvent.playerState == PlayerState.PLAYING,
                 isShowingPlayer = mediaEvent.playerState != PlayerState.STOPPED,
                 progress = currentPosition.toFloat() / mediaEvent.totalDuration,
+                volume = mediaEvent.volume,
             )
         }
     }.stateIn(
@@ -139,4 +146,15 @@ class AlbumDetailViewModel @Inject constructor(
         resumeSongUseCase()
     }
 
+    fun skipToPreviousSong() {
+        skipToPreviousSongUseCase()
+    }
+
+    fun skipToNextSong() {
+        skipToNextSongUseCase()
+    }
+
+    fun setVolume(volume: Float) {
+        setVolumeUseCase(volume)
+    }
 }

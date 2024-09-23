@@ -54,7 +54,6 @@ internal fun MusicPlayerBanner(
                     painter = painterResource(id = if (isPlaying) R.drawable.baseline_pause_24 else R.drawable.baseline_play_arrow_24),
                     contentDescription = ""
                 )
-
             }
             Column(
                 modifier = Modifier.weight(1f),

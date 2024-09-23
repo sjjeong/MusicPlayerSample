@@ -32,6 +32,9 @@ fun AlbumListScreen(
         onAlbumClick = onAlbumClick,
         onPauseClick = viewModel::pause,
         onResumeClick = viewModel::resume,
+        onSkipToPreviousSongClick = viewModel::skipToPreviousSong,
+        onSkipToNextSongClick = viewModel::skipToNextSong,
+        onVolumeChange = viewModel::setVolume,
     )
 }
 
@@ -42,6 +45,9 @@ fun AlbumListScreen(
     onAlbumClick: (Uri) -> Unit,
     onPauseClick: () -> Unit,
     onResumeClick: () -> Unit,
+    onSkipToPreviousSongClick: () -> Unit,
+    onSkipToNextSongClick: () -> Unit,
+    onVolumeChange: (Float) -> Unit,
     modifier: Modifier = Modifier,
 ) {
 
@@ -71,9 +77,13 @@ fun AlbumListScreen(
                     isPlaying = uiState.isPlaying,
                     isShowingPlayer = uiState.isShowingPlayer,
                     progress = uiState.progress,
+                    volume = uiState.volume,
                     onAlbumClick = onAlbumClick,
                     onPauseClick = onPauseClick,
                     onResumeClick = onResumeClick,
+                    onSkipToPreviousSongClick = onSkipToPreviousSongClick,
+                    onSkipToNextSongClick = onSkipToNextSongClick,
+                    onVolumeChange = onVolumeChange,
                     modifier = Modifier.padding(paddingValues)
                 )
             }
@@ -99,10 +109,14 @@ private fun AlbumListScreenPreviewSuccess() {
             isPlaying = false,
             isShowingPlayer = false,
             progress = 0.9f,
+            volume = 0.5f
         ),
         onAlbumClick = {},
         onPauseClick = {},
         onResumeClick = {},
+        onSkipToPreviousSongClick = {},
+        onSkipToNextSongClick = {},
+        onVolumeChange = {},
     )
 }
 
@@ -114,6 +128,9 @@ private fun AlbumListScreenPreviewLoading() {
         onAlbumClick = {},
         onPauseClick = {},
         onResumeClick = {},
+        onSkipToPreviousSongClick = {},
+        onSkipToNextSongClick = {},
+        onVolumeChange = {},
     )
 }
 
@@ -126,6 +143,9 @@ private fun AlbumListScreenPreviewEmpty() {
         onAlbumClick = {},
         onPauseClick = {},
         onResumeClick = {},
+        onSkipToPreviousSongClick = {},
+        onSkipToNextSongClick = {},
+        onVolumeChange = {},
     )
 }
 
@@ -138,5 +158,8 @@ private fun AlbumListScreenPreviewError() {
         onAlbumClick = {},
         onPauseClick = {},
         onResumeClick = {},
+        onSkipToPreviousSongClick = {},
+        onSkipToNextSongClick = {},
+        onVolumeChange = {},
     )
 }
